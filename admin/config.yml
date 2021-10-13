@@ -1,0 +1,1928 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: articles
+    label: Blog Posts
+    folder: cms/articles
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Post Body
+        name: body
+        widget: markdown
+        required: false
+      - hint: A summary of the blog post that appears on blog post grid
+        name: f_post-summary
+        label: Post Summary
+        widget: text
+        required: false
+      - hint: ''
+        name: f_featured-image
+        label: Featured image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: Smaller version of main image that is used on blog post grid
+        name: f_thumbnail-image
+        label: Thumbnail image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_featured
+        label: Featured?
+        widget: boolean
+        required: false
+      - hint: ''
+        name: f_color
+        label: Color
+        widget: color
+        required: false
+        enableAlpha: true
+        allowInput: true
+      - hint: ''
+        name: f_date-and-time
+        label: date and time
+        widget: datetime
+        required: true
+      - hint: ''
+        name: f_author
+        label: Author
+        widget: string
+        required: false
+      - hint: ''
+        name: f_post-content
+        label: post content
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_count-of-postings
+        label: count of postings
+        widget: number
+        required: true
+      - hint: ''
+        name: f_author-and-designation
+        label: Author and designation
+        widget: string
+        required: false
+      - hint: ''
+        name: f_article-link
+        label: article link
+        widget: string
+        required: false
+      - hint: ''
+        name: f_title-tag
+        label: Title tag
+        widget: text
+        required: false
+      - hint: ''
+        name: f_meta-description
+        label: Meta Description
+        widget: text
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: articles
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[articles].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: case_studies
+    label: Case Studies
+    folder: cms/case-studies
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Main Description
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_image
+        label: Featured Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_description
+        label: Short Description
+        widget: string
+        required: false
+      - hint: ''
+        name: f_sub-image
+        label: sub image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_secondary-description
+        label: background information section
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_second-details-section
+        label: second details section
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_title-tag
+        label: Title tag
+        widget: text
+        required: false
+      - hint: ''
+        name: f_meta-description
+        label: Meta Description
+        widget: text
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: case_studies
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[case-studies].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: category
+    label: Categories
+    folder: cms/category
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: category
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[category].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: product
+    label: Products
+    folder: cms/product
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: variation-properties
+        label: Variation Properties
+        widget: list
+        required: false
+        summary: '{{name}}'
+        fields:
+          - hint: ''
+            name: slug
+            label: Slug
+            widget: hidden
+            required: true
+          - hint: ''
+            name: name
+            label: Name
+            widget: string
+            required: true
+          - hint: ''
+            name: values
+            label: Values
+            widget: list
+            required: true
+            summary: '{{name}}'
+            fields:
+              - hint: ''
+                name: slug
+                label: Slug
+                widget: hidden
+                required: true
+              - hint: ''
+                name: name
+                label: Name
+                widget: string
+                required: true
+      - hint: ''
+        name: variations
+        label: Variations
+        widget: list
+        required: true
+        summary: '{{title}}'
+        min: 1
+        fields:
+          - hint: Slug of the variation
+            name: slug
+            label: Slug
+            widget: string
+            required: true
+          - hint: Default variation?
+            name: default
+            label: Default
+            widget: boolean
+            required: true
+          - hint: ''
+            name: variation-properties
+            label: SKU Values
+            widget: prop-values
+            required: false
+          - hint: ''
+            name: title
+            label: Name
+            widget: string
+            required: true
+          - hint: ''
+            name: f_main-image
+            label: Main Image
+            widget: object
+            required: false
+            fields:
+              - hint: ''
+                name: url
+                label: Image
+                widget: image
+                required: false
+                allow_multiple: false
+              - hint: Image Alt
+                name: alt
+                label: alt
+                widget: string
+                required: false
+          - hint: ''
+            name: f_more-images
+            label: More Images
+            widget: list
+            required: false
+            fields:
+              - hint: ''
+                name: url
+                label: Image
+                widget: image
+                required: false
+                allow_multiple: false
+              - hint: Image Alt
+                name: alt
+                label: alt
+                widget: string
+                required: false
+          - hint: ''
+            name: f_price
+            label: Price
+            widget: price
+            required: true
+          - hint: Compare at Price must be higher than price
+            name: f_compare-at-price
+            label: Compare at price
+            widget: price
+            required: false
+          - hint: ''
+            name: f_download-files
+            label: Downloads
+            widget: list
+            required: false
+            fields:
+              - hint: ''
+                name: url
+                label: Image
+                widget: image
+                required: false
+                allow_multiple: false
+              - hint: Image Alt
+                name: alt
+                label: alt
+                widget: string
+                required: false
+          - hint: ''
+            name: f_width
+            label: Width
+            widget: number
+            required: false
+          - hint: ''
+            name: f_length
+            label: Length
+            widget: number
+            required: false
+          - hint: ''
+            name: f_height
+            label: Height
+            widget: number
+            required: false
+          - hint: ''
+            name: f_weight
+            label: Weight
+            widget: number
+            required: false
+          - hint: ''
+            name: f_sku
+            label: SKU
+            widget: string
+            required: false
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: Add this product to one or more categories.
+        name: f_category
+        label: Categories
+        widget: relation
+        required: false
+        collection: category
+        value_field: cms/category/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: true
+      - hint: ''
+        name: f_description
+        label: Description
+        widget: string
+        required: false
+      - hint: ''
+        name: f_shippable
+        label: Requires Shipping
+        widget: boolean
+        required: false
+      - hint: ''
+        name: f_ec-product-type
+        label: Product type
+        widget: select
+        required: false
+        options:
+          - label: Physical
+            value: Physical
+          - label: Digital
+            value: Digital
+          - label: Service
+            value: Service
+          - label: Advanced
+            value: Advanced
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: product
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[product].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: capabilities
+    label: Capabilities
+    folder: cms/capabilities
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_description
+        label: Description
+        widget: text
+        required: false
+      - hint: ''
+        name: f_icon
+        label: Icon
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_color
+        label: Color
+        widget: color
+        required: false
+        enableAlpha: true
+        allowInput: true
+      - hint: ''
+        name: f_main-category
+        label: main category
+        widget: relation
+        required: false
+        collection: main_category
+        value_field: cms/main-category/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: false
+      - hint: ''
+        name: f_title-tag
+        label: Title tag
+        widget: string
+        required: false
+      - hint: ''
+        name: f_meta-description
+        label: Meta Description
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: capabilities
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[capabilities].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: main_category
+    label: Main Categories
+    folder: cms/main-category
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_description
+        label: Description
+        widget: text
+        required: false
+      - hint: ''
+        name: f_icon
+        label: Icon
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_color
+        label: Color
+        widget: color
+        required: false
+        enableAlpha: true
+        allowInput: true
+      - hint: ''
+        name: f_title-tag
+        label: Title Tag
+        widget: text
+        required: false
+      - hint: ''
+        name: f_meta-description
+        label: Meta Description
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: main_category
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[main-category].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: "Original text: CASE\_STUDIES, key: -5ca89569"
+            label: Text
+            name: '-5ca89569'
+            widget: string
+          - hint: 'Original text: INSIGHTS, key: 4f2427db'
+            label: Text
+            name: 4f2427db
+            widget: string
+          - hint: 'Original text: CAPABILITES, key: -27b1f031'
+            label: Text
+            name: '-27b1f031'
+            widget: string
+          - hint: >-
+              Original text: Data-driven strategies to grow your start-up, key:
+              -e25206b
+            label: Text
+            name: '-e25206b'
+            widget: string
+          - hint: 'Original text: ‍, key: 200d'
+            label: Text
+            name: 200d
+            widget: string
+          - hint: >-
+              Original text: helping entrepreneurs like you turn big data into
+              business success stories., key: -53ce8db0
+            label: Text
+            name: '-53ce8db0'
+            widget: string
+          - hint: 'Original text: view case study >, key: 21a77452'
+            label: Text
+            name: 21a77452
+            widget: string
+          - hint: 'Original text: No items found., key: 3d503d2b'
+            label: Text
+            name: 3d503d2b
+            widget: string
+          - hint: 'Original text: View all cases, key: b1cdc69'
+            label: Text
+            name: b1cdc69
+            widget: string
+          - hint: "Original text: Entrepreneur: do you need several hands getting your idea off the ground and into the market?\_ Maslow may be able to help you. We’ll get you there by creating solutions tailored to scale with your specific needs so you don’t have to work your fingers to the bone. Maslow will work side by side with you through every step of the process. Together, we will see your business prepared all the way to Series A investments so you can really take off.\_\_Once you read on and get a glimpse of how Mazlow can work with you, we can have a conversation and see how your story can come to life., key: -3806f97c"
+            label: Text
+            name: '-3806f97c'
+            widget: text
+          - hint: "Original text: LEARN MORE \_>, key: -72ef55b3"
+            label: Text
+            name: '-72ef55b3'
+            widget: string
+          - hint: "Original text: Insights \_\_\_\_, key: 2ec105"
+            label: Text
+            name: 2ec105
+            widget: string
+          - hint: "Original text: READ MORE \_>, key: 723613bf"
+            label: Text
+            name: 723613bf
+            widget: string
+          - hint: 'Original text: Capabilities, key: -4edf9c2a'
+            label: Text
+            name: '-4edf9c2a'
+            widget: string
+          - hint: "Original text: VIEW ALL \_>, key: 1c1f478"
+            label: Text
+            name: 1c1f478
+            widget: string
+          - hint: 'Original text: New Jersey, key: 57def930'
+            label: Text
+            name: 57def930
+            widget: string
+          - hint: 'Original text: 12345 Blvd of Americas, key: 3c8b3533'
+            label: Text
+            name: 3c8b3533
+            widget: string
+          - hint: 'Original text: New York City, NY 10001., key: -73dcb63f'
+            label: Text
+            name: '-73dcb63f'
+            widget: string
+          - hint: 'Original text: Opening Hours 9am-5pm EST, key: 35205cf7'
+            label: Text
+            name: 35205cf7
+            widget: string
+          - hint: 'Original text: CONTACT US, key: 253fd2be'
+            label: Text
+            name: 253fd2be
+            widget: string
+          - hint: 'Original text: India, key: 4383917'
+            label: Text
+            name: '4383917'
+            widget: string
+          - hint: 'Original text: 123 S ave, key: 702e8a15'
+            label: Text
+            name: 702e8a15
+            widget: string
+          - hint: 'Original text: Hyderabad, India., key: 18fc99af'
+            label: Text
+            name: 18fc99af
+            widget: string
+          - hint: 'Original text: Opening Hours 9am-5pm IST, key: 35206bfb'
+            label: Text
+            name: 35206bfb
+            widget: string
+          - hint: 'Original text: Copyright 2020, key: -109ffe2b'
+            label: Text
+            name: '-109ffe2b'
+            widget: string
+          - hint: 'Original text: All rights reserved, key: -3972594e'
+            label: Text
+            name: '-3972594e'
+            widget: string
+          - hint: 'Original text: Our capabilities, key: -463b4fd6'
+            label: Text
+            name: '-463b4fd6'
+            widget: string
+          - hint: >-
+              Original text: we turn big data into business success stories,
+              key: -36da198f
+            label: Text
+            name: '-36da198f'
+            widget: string
+          - hint: 'Original text: What we do, key: -2d422d1f'
+            label: Text
+            name: '-2d422d1f'
+            widget: string
+          - hint: 'Original text: Strategic , key: 7c063ee0'
+            label: Text
+            name: 7c063ee0
+            widget: string
+          - hint: 'Original text: navigation, flawless execution, key: -3b521bab'
+            label: Text
+            name: '-3b521bab'
+            widget: string
+          - hint: "Original text: As an entrepreneur, you've come this far, but its a slow, rough uphill battle.\_ There are areas of the business you excel at and love, and then there are the confusing and difficult areas that grind your progress to a halt. We are here to take care of those processes and lighten your load. Our work is meticulous and clean, but smoothly presented., key: -642ed2ee"
+            label: Text
+            name: '-642ed2ee'
+            widget: text
+          - hint: "Original text: All of our processes, from research, design, development, to marketing all work together in a state of continuous development to keep you relevant and expanding in the market. Internally, we help you stay on top of your business and keep you connected to your audience with a flexible plan.\_ Get organized, get moving., key: -3b382c4a"
+            label: Text
+            name: '-3b382c4a'
+            widget: text
+          - hint: >-
+              Original text: Technology is meant to make our lives easier, but
+              too often it is so complicated we wonder who's really in charge.
+              Most people don't want to know how it all works, only that it
+              works and does what it's supposed to., key: -30dcd1e7
+            label: Text
+            name: '-30dcd1e7'
+            widget: text
+          - hint: >-
+              Original text: Our job is to make sure the most efficient
+              technologies are serving your needs. Maslow’s experience is deeply
+              rooted in selecting the right tech for the right problem and
+              keeping it simple, out of the way, but friendly to work with when
+              you need it. You focus on the end results, while our experience
+              will handle everything in between., key: 77058b59
+            label: Text
+            name: 77058b59
+            widget: text
+          - hint: 'Original text: Technology , key: 4472c474'
+            label: Text
+            name: 4472c474
+            widget: string
+          - hint: 'Original text: savvy,, key: -36345b1f'
+            label: Text
+            name: '-36345b1f'
+            widget: string
+          - hint: 'Original text: usability geniuses, key: 3f617f39'
+            label: Text
+            name: 3f617f39
+            widget: string
+          - hint: 'Original text: Design , key: -3ff8f1fe'
+            label: Text
+            name: '-3ff8f1fe'
+            widget: string
+          - hint: 'Original text: expertise,, key: -47cbfc5'
+            label: Text
+            name: '-47cbfc5'
+            widget: string
+          - hint: 'Original text: user empathetic, key: 770507cb'
+            label: Text
+            name: 770507cb
+            widget: string
+          - hint: >-
+              Original text: The greatest idea has no use if no one can
+              understand it. We conduct research and testing with customers,
+              then come up with a plan that fits their needs and ease-of-use
+              preferences., key: 4e4e4290
+            label: Text
+            name: 4e4e4290
+            widget: text
+          - hint: "Original text: We find all the factors that affect your success: from the impact and success of visuals, to technical details like response time with navigating your site, or even what part of your site is causing people to lose interest and abandon it.\_ This information shapes the design of your product in a way that makes sense to the market, and grows with their needs so that it becomes something they love, something you can be proud of., key: -68d0af96"
+            label: Text
+            name: '-68d0af96'
+            widget: text
+          - hint: "Original text: This does not end with one design.\_ As your product is developed and running, there will be a wealth of feedback data to process so we can determine how to optimize your consumer’s experience. You don’t stop growing - neither should your business., key: -33f07abe"
+            label: Text
+            name: '-33f07abe'
+            widget: text
+          - hint: 'Original text: Protected Page, key: -11d4bbff'
+            label: Text
+            name: '-11d4bbff'
+            widget: string
+          - hint: >-
+              Original text: Incorrect password. Please try again., key:
+              -f5c4b5f
+            label: Text
+            name: '-f5c4b5f'
+            widget: string
+          - hint: 'Original text: Page Not Found, key: -40b0787c'
+            label: Text
+            name: '-40b0787c'
+            widget: string
+          - hint: >-
+              Original text: The page you are looking for doesn't exist or has
+              been moved., key: 583f3656
+            label: Text
+            name: 583f3656
+            widget: string
+          - hint: "Original text: CASE\_STUDY, key: -659737c7"
+            label: Text
+            name: '-659737c7'
+            widget: string
+          - hint: 'Original text: Showcase Hub, key: -2baa11fe'
+            label: Text
+            name: '-2baa11fe'
+            widget: string
+          - hint: >-
+              Original text: Dance is the most ephemeral art used in performance
+              or when conveying a message to an audience. Mostly the use of
+              music when performing dance gains more harmony making it more
+              interesting. Dance review is essential during the dance talent
+              development process. It involves intuitive judgments and a
+              systematic way to analyze dance. Through the reviews, dancers get
+              feedback where they go wrong and comments on how to do better.
+              This helps them to improve their skills and understand how to gain
+              new skills and moves., key: 3fe1f83
+            label: Text
+            name: 3fe1f83
+            widget: text
+          - hint: "Original text: YEAR \_\_\_\_\_\_\_\_\_\_\_\_, key: 1ee5d303"
+            label: Text
+            name: 1ee5d303
+            widget: string
+          - hint: 'Original text: 2017, key: 1774e4'
+            label: Text
+            name: '1774e4'
+            widget: string
+          - hint: "Original text: SKILLS\_\_\_\_\_\_\_\_\_\_, key: -54f7123e"
+            label: Text
+            name: '-54f7123e'
+            widget: string
+          - hint: 'Original text: PHP, Laravel, key: 7706004d'
+            label: Text
+            name: 7706004d
+            widget: string
+          - hint: "Original text:  \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_FFMPEG, key: 6e488e45"
+            label: Text
+            name: 6e488e45
+            widget: string
+          - hint: "Original text: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_iOS &\_Web Development, key: 2789a462"
+            label: Text
+            name: 2789a462
+            widget: string
+          - hint: 'Original text: “, key: 201c'
+            label: Text
+            name: 201c
+            widget: string
+          - hint: >-
+              Original text: The benefits to our business were huge. We didn’t
+              have to spend a ton of resources just getting our data and
+              technology working. Maslow made our technology partner solution an
+              easy decision., key: -38d06777
+            label: Text
+            name: '-38d06777'
+            widget: text
+          - hint: 'Original text: - Jeff Sierra, Showcase Hub, key: -6f5ccd86'
+            label: Text
+            name: '-6f5ccd86'
+            widget: string
+          - hint: 'Original text: Background Information, key: -18768ac6'
+            label: Text
+            name: '-18768ac6'
+            widget: string
+          - hint: >-
+              Original text: Showcase is an organization that aims to develop
+              dancers to professionals by reviewing their dance skills and give
+              advice on how to improve them. It has a team of professionals with
+              exemplifying qualities that analyze dance skills and provide
+              personalized reviews. Showcase hub provides valuable insights
+              through objective coach observers who are capable of understanding
+              dance technique and choreography., key: -4b2effb4
+            label: Text
+            name: '-4b2effb4'
+            widget: text
+          - hint: 'Original text: By the numbers, key: -59505c8e'
+            label: Text
+            name: '-59505c8e'
+            widget: string
+          - hint: 'Original text: 85%, key: d8c8'
+            label: Text
+            name: d8c8
+            widget: string
+          - hint: 'Original text: increase, key: 5ae7e42'
+            label: Text
+            name: 5ae7e42
+            widget: string
+          - hint: >-
+              Original text: overall code reusability and 1200% reduction in
+              client code, key: -7ca290a0
+            label: Text
+            name: '-7ca290a0'
+            widget: string
+          - hint: 'Original text: 3/4 customers, key: 1568978d'
+            label: Text
+            name: 1568978d
+            widget: string
+          - hint: >-
+              Original text: 75% site revisit within the first 30 days of, key:
+              31be8cc9
+            label: Text
+            name: 31be8cc9
+            widget: string
+          - hint: 'Original text: product launch, key: -1091dbfc'
+            label: Text
+            name: '-1091dbfc'
+            widget: string
+          - hint: 'Original text: 94%, key: dc6a'
+            label: Text
+            name: dc6a
+            widget: string
+          - hint: 'Original text: delight, key: 5c6bd135'
+            label: Text
+            name: 5c6bd135
+            widget: string
+          - hint: >-
+              Original text: 94% of users reported the platform improved, key:
+              -55c45c78
+            label: Text
+            name: '-55c45c78'
+            widget: string
+          - hint: 'Original text: their dancing skills, key: 6b71aa38'
+            label: Text
+            name: 6b71aa38
+            widget: string
+          - hint: 'Original text: Second details section of case., key: -5162c586'
+            label: Text
+            name: '-5162c586'
+            widget: string
+          - hint: >-
+              Original text: • Provide guides and relevant literature on dancing
+              skills during rehearsals. , key: -32f6bc7
+            label: Text
+            name: '-32f6bc7'
+            widget: string
+          - hint: >-
+              Original text: • Analyze dancer videos and give feedback and
+              comments., key: 4d711d63
+            label: Text
+            name: 4d711d63
+            widget: string
+          - hint: "Original text: • Review videos uploaded by dancers on the site. \_\_\_\_\_\_\_\_\_\_\_\_, key: 2eb88b56"
+            label: Text
+            name: 2eb88b56
+            widget: string
+          - hint: >-
+              Original text: • Open-access Test Auditions allow for community
+              building and exposure, key: 533dbe26
+            label: Text
+            name: 533dbe26
+            widget: string
+          - hint: 'Original text: Highbrow, key: -60921906'
+            label: Text
+            name: '-60921906'
+            widget: string
+          - hint: >-
+              Original text: Taking a cannabis and MMJ brand to market, key:
+              -439879b3
+            label: Text
+            name: '-439879b3'
+            widget: string
+          - hint: >-
+              Original text: Showcase your talent and get your feedback, key:
+              4c931085
+            label: Text
+            name: 4c931085
+            widget: string
+          - hint: 'Original text: Axis Clinicals, key: -307c01ff'
+            label: Text
+            name: '-307c01ff'
+            widget: string
+          - hint: >-
+              Original text: Axis Clinicals Built infrastructure for Clinical
+              Trials company., key: 2acfde9a
+            label: Text
+            name: 2acfde9a
+            widget: string
+          - hint: 'Original text: ARTICLE, key: -dba72a'
+            label: Text
+            name: '-dba72a'
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet adipscing consecutor
+              elito nonummy poremusultricies vivendi ludovico sabatino ellyoes
+              estramas. Lorem ipsum dolor sitamet adipscing consecutor elito
+              nonummy poremus!, key: 66be0acd
+            label: Text
+            name: 66be0acd
+            widget: text
+          - hint: 'Original text: More articles, key: 18f9688'
+            label: Text
+            name: 18f9688
+            widget: string
+          - hint: "Original text: Read Article\_>, key: -57a49ef6"
+            label: Text
+            name: '-57a49ef6'
+            widget: string
+          - hint: 'Original text: FEATURED, key: 1d52d42e'
+            label: Text
+            name: 1d52d42e
+            widget: string
+          - hint: 'Original text: Has the first window of opportunity, key: -66d4220b'
+            label: Text
+            name: '-66d4220b'
+            widget: string
+          - hint: 'Original text: for AI brands finally closed?, key: -3962ad3d'
+            label: Text
+            name: '-3962ad3d'
+            widget: string
+          - hint: "Original text: READ\_ARTICLE >, key: -6771ff16"
+            label: Text
+            name: '-6771ff16'
+            widget: string
+          - hint: >-
+              Original text: In the past decades, people have neglected
+              scientific research of the cannabis plant, which has led many
+              organizations to establish cannabis research and education to
+              produce consistent quality. Also, there is genuinely mystifying
+              incorrect information across internet sites. The highbrow Group
+              has a platform where cannabis consumers get information about CBD
+              and medical marijuana., key: 6c523c59
+            label: Text
+            name: 6c523c59
+            widget: text
+          - hint: 'Original text: 2020, key: 1774fc'
+            label: Text
+            name: 1774fc
+            widget: string
+          - hint: "Original text:  \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_YiYi Framework, key: 2bd781e"
+            label: Text
+            name: 2bd781e
+            widget: string
+          - hint: "Original text: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_Web Development, Marketing, key: -5651d27d"
+            label: Text
+            name: '-5651d27d'
+            widget: string
+          - hint: 'Original text: - David Trujillo, Highbrow Group, key: -6b47891b'
+            label: Text
+            name: '-6b47891b'
+            widget: string
+          - hint: "Original text: Highbrow Group is an educational organization focusing on the research of CBD and medical marijuana. It is dedicated to furthering innovative research to produce more CBD content and medical marijuana information. The company operates in the cannabis industry, serving medical and consumer markets with valuable information about cannabis products and benefits. It provides a platform where people can broaden their knowledge about CBD and medical marijuana's uses and benefits.\_, key: -3ac2de15"
+            label: Text
+            name: '-3ac2de15'
+            widget: text
+          - hint: 'Original text: overall code reusability, key: 229d9b9'
+            label: Text
+            name: 229d9b9
+            widget: string
+          - hint: 'Original text: and 1200% reduction in, key: -38e0dee9'
+            label: Text
+            name: '-38e0dee9'
+            widget: string
+          - hint: 'Original text: client code, key: -dd9aede'
+            label: Text
+            name: '-dd9aede'
+            widget: string
+          - hint: 'Original text: 3/4, key: c558'
+            label: Text
+            name: c558
+            widget: string
+          - hint: 'Original text: customers, key: 600e7c55'
+            label: Text
+            name: 600e7c55
+            widget: string
+          - hint: 'Original text: 75% site revisit within, key: -4bed780d'
+            label: Text
+            name: '-4bed780d'
+            widget: string
+          - hint: 'Original text: the first 30 days of, key: 7d17debc'
+            label: Text
+            name: 7d17debc
+            widget: string
+          - hint: 'Original text: 94% of users reported , key: -56baa73e'
+            label: Text
+            name: '-56baa73e'
+            widget: string
+          - hint: 'Original text: the platform improved, key: 7ce28f0a'
+            label: Text
+            name: 7ce28f0a
+            widget: string
+          - hint: "Original text: Highbrow group bases on the principle that everyone should have access to knowledge about personal health and quality of life. It cultivates on a wide range of information publishing articles related to CBD and medical marijuana worldwide research of this industry. The company has a website where people can access engaging articles and peer review journals. These articles discuss CBD and medical marijuana, how to use cannabis products, how medicine heals several kinds of diseases, and many others. Through the articles, the readers can attain the information which will help them solve their problems.\_\_, key: -52d8634d"
+            label: Text
+            name: '-52d8634d'
+            widget: text
+          - hint: 'Original text: At Maslow, we build, key: -2f40744e'
+            label: Text
+            name: '-2f40744e'
+            widget: string
+          - hint: 'Original text: web applications, key: -327c4d91'
+            label: Text
+            name: '-327c4d91'
+            widget: string
+          - hint: 'Original text:  that, key: 1f93dc7'
+            label: Text
+            name: 1f93dc7
+            widget: string
+          - hint: 'Original text: delight users., key: -58980b8f'
+            label: Text
+            name: '-58980b8f'
+            widget: string
+          - hint: 'Original text: Contact Us, key: 7f2746de'
+            label: Text
+            name: 7f2746de
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit adipscing consecutor elito
+              nonummy, key: -13b6b866
+            label: Text
+            name: '-13b6b866'
+            widget: string
+          - hint: >-
+              Original text: MaslowAI is an AI research and deployment agency
+              based in New York City,Atlanta and Dubai. Lorem ipsum dolor sit
+              amet adipscing consecutor elitosnonummy poremus ultricies vivendi
+              bibendum ludivico sabatino ellyoes.Loremus sabatino estramas
+              ludovico estramas., key: 4517903d
+            label: Text
+            name: 4517903d
+            widget: text
+          - hint: >-
+              Original text: Ludovico sabatino ellyoes estramas poremus
+              ultricies vivebdi bibendum.Atlanta and Dubai. Lorem ipsum dolor
+              sit amet adipscing consecutor elitosnonummy poremus ultricies
+              vivendi bibendum ludivico sabatino ellyoes.Loremus sabatino
+              estramas ludovico estramas., key: -6e77d59e
+            label: Text
+            name: '-6e77d59e'
+            widget: text
+          - hint: >-
+              Original text: Our A.I. personalization engine powered
+              Highbrow’splatform launch, leading to +1200% user adoption, key:
+              7d2c4b35
+            label: Text
+            name: 7d2c4b35
+            widget: text
+          - hint: 'Original text: Nerve Studio, key: 6374256c'
+            label: Text
+            name: 6374256c
+            widget: string
+          - hint: "Original text: We built a \_tailored Content Management System to support a diverse body of needs, key: -3cfee77"
+            label: Text
+            name: '-3cfee77'
+            widget: string
+          - hint: 'Original text: Contact us, key: 7f274abe'
+            label: Text
+            name: 7f274abe
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet adipscing consecutor
+              elito nonummy poremus ultricies vivendi bibendum ludovico sabatino
+              ellyoes estramas. Lorem ipsum dolor sit amet adipscing consecutor
+              elit nonummy poremus ultricies vivendi bibendum ludovico., key:
+              598fa213
+            label: Text
+            name: 598fa213
+            widget: text
+          - hint: >-
+              Original text: Please be aware that our current minimum project ,
+              key: -2d76c85c
+            label: Text
+            name: '-2d76c85c'
+            widget: string
+          - hint: 'Original text: engagement is $25,000., key: -3fa60f08'
+            label: Text
+            name: '-3fa60f08'
+            widget: string
+          - hint: "Original text: FIRST\_NAME, key: 18a8629b"
+            label: Text
+            name: 18a8629b
+            widget: string
+          - hint: 'Original text: CONTACT, key: 6382b000'
+            label: Text
+            name: 6382b000
+            widget: string
+          - hint: "Original text: LAST\_NAME, key: 236cc655"
+            label: Text
+            name: 236cc655
+            widget: string
+          - hint: 'Original text: COMPANY, key: 6372c85d'
+            label: Text
+            name: 6372c85d
+            widget: string
+          - hint: 'Original text: MESSAGE, key: 63b68be7'
+            label: Text
+            name: 63b68be7
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: >-
+              Original text: “Working with Maslow was lorem ipsum dolor sit amet
+              adipscing consect utoros elito nonummy poremus ultricies! Vivendi
+              bibendum ludovico estos sabatino ellyoes estramas loremus
+              ipsolurues.”, key: 5883c879
+            label: Text
+            name: 5883c879
+            widget: text
+          - hint: >-
+              Original text: DAVID TRUJILLO, PRESIDENT of HIGHBROW MORE, key:
+              -52d2b5f5
+            label: Text
+            name: '-52d2b5f5'
+            widget: string
+          - hint: "Original text: READ\_CASE\_STUDY >, key: 279524e1"
+            label: Text
+            name: '279524e1'
+            widget: string
+          - hint: 'Original text: Case Studies, key: -667f9cc9'
+            label: Text
+            name: '-667f9cc9'
+            widget: string
+          - hint: 'Original text: Schedule a 30 min call, key: 3a9e5ae7'
+            label: Text
+            name: 3a9e5ae7
+            widget: string
+          - hint: 'Original text: Are you struggling with:, key: -147c78e5'
+            label: Text
+            name: '-147c78e5'
+            widget: string
+          - hint: 'Original text:  - , key: 7db3'
+            label: Text
+            name: 7db3
+            widget: string
+          - hint: >-
+              Original text: the staggering amount of work you need to do to
+              launch or grow your start-up?, key: 2d6bf4eb
+            label: Text
+            name: 2d6bf4eb
+            widget: string
+          - hint: >-
+              Original text: - manual processes that you don’t know how to
+              automate?, key: 1fce0a19
+            label: Text
+            name: 1fce0a19
+            widget: string
+          - hint: >-
+              Original text: - being unable to prepare your business for Series
+              A funding?, key: -1c5519e5
+            label: Text
+            name: '-1c5519e5'
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: 'Original link: /case-study-list, key: -62f3730'
+            label: Link
+            name: '-62f3730'
+            widget: string
+          - hint: 'Original link: /articles-list, key: -42911da1'
+            label: Link
+            name: '-42911da1'
+            widget: string
+          - hint: 'Original link: /capabilities, key: 71634165'
+            label: Link
+            name: '71634165'
+            widget: string
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: /case-studies, key: 3cf9f039'
+            label: Link
+            name: 3cf9f039
+            widget: string
+          - hint: 'Original link: /case-studies-highbrow, key: 352945ee'
+            label: Link
+            name: 352945ee
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.maslow.ai/articles/has-the-first-window-of-oppurtunity-for-ai-brands-finally-closed,
+              key: -5d3e05a7
+            label: Link
+            name: '-5d3e05a7'
+            widget: string
+          - hint: >-
+              Original link: https://www.maslow.ai/case-studies/showcase-hub,
+              key: -d3525ba
+            label: Link
+            name: '-d3525ba'
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: 7c5b65f7
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2c130ef2
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 63fe752f
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 196cd40c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4c3bc38e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1d5d964c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-6087357f'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '16895158'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-24b49b59'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2ea821e3'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-797d6ef5'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-46fb7d90'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-613b78a6'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4f194416
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4cfae4ea'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1adf2620
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+      - label: eCommerce
+        name: ecommerce
+        file: cms/_data/settings/ecommerce.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: eCommerce
+          - label: Currencies and Formats
+            name: currencies_and_formats
+            widget: object
+            fields:
+              - hint: >-
+                  Template used to format the price, you can use following
+                  placeholders: {amount}, {currencyCode}, {symbol}
+                name: template
+                label: Price Template
+                widget: string
+                required: true
+              - hint: Character to divide decimals
+                name: decimal
+                label: Decimal
+                widget: string
+                required: true
+              - hint: Character to group amount
+                name: group
+                label: Group
+                widget: string
+                required: true
+              - hint: Number of fraction digits
+                name: fractionDigits
+                label: Fraction Digits
+                widget: number
+                required: true
+                value_type: int
+              - hint: Hide decimals for whole prices
+                name: hideDecimalForWholeNumbers
+                label: Hide decimals
+                widget: boolean
+                required: false
+              - hint: ''
+                name: currencies
+                label: Currencies
+                widget: list
+                required: true
+                min: 1
+                fields:
+                  - hint: Currency Code (3 char) all lowercase
+                    name: currencyCode
+                    label: Currency Code
+                    widget: string
+                    required: true
+                  - hint: ''
+                    name: symbol
+                    label: Symbol
+                    widget: string
+                    required: true
+          - label: Snipcart
+            name: snipcart
+            widget: object
+            fields:
+              - hint: Public Api Key
+                name: apiKey
+                label: Api Key
+                widget: string
+                required: true
+          - label: Snipcart Style
+            name: css
+            widget: object
+            fields:
+              - hint: 'Original color: #52bcf8'
+                name: primary-color
+                label: Primary color
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #5082e4'
+                name: secondary-color
+                label: Secondary color
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #f0f5f6'
+                name: tertiary-color
+                label: Tertiary color
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e8f0fe'
+                name: autofill-color
+                label: Autofill color
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original Font Family: Open Sans,sans-serif'
+                name: main-font
+                label: Main font
+                widget: string
+                required: true
+              - hint: 'Original color: #313332'
+                name: text-color
+                label: Text color
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #d93120'
+                name: red-color
+                label: Red color
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original Font Family: Montserrat,sans-serif'
+                name: heading-font
+                label: Heading font
+                widget: string
+                required: true
+              - hint: 'Original color: #6ae35c'
+                name: green-color
+                label: Green color
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: white-color
+                label: White color
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fdfefe'
+                name: input-bgcolor
+                label: Input bgcolor
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #f7fafa'
+                name: box-bgcolor
+                label: Box bgcolor
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+publish_mode: editorial_workflow

@@ -1,0 +1,10 @@
+<div class="collection-list-wrapper w-dyn-list">
+            {%- unless collection.length == 0 -%}<div role="list" class="collection-list-3 w-dyn-items">
+              {%- for item in collection -%}<div role="listitem" class="w-dyn-item">
+                <a href="{{ item.url }}" class="link-10">{{ item.data.title }}</a>
+              </div>{%- endfor -%}
+            </div>{%- endunless -%}
+            {%- if collection.length == 0 -%}<div class="w-dyn-empty">
+              <div>{{ texts.3d503d2b }}</div>
+            </div>{%- endif -%}
+          </div>

@@ -1,0 +1,24 @@
+<div class="w-container">
+      <div class="text-block-28 articles">{{ texts.18f9688 }}</div>
+      {%- assign collection = collections.articles | sort: "-published-on" | limit: 5 -%}<div class="w-dyn-list">
+        {%- unless collection.length == 0 -%}<div role="list" class="collection-list w-dyn-items">
+          {%- for item in collection -%}<div data-w-id="fd111cc0-c0b3-0844-de03-9b816c098a56" role="listitem" class="collection-item w-dyn-item">
+            <a href="{{ item.url }}" class="articles-wrapper w-inline-block">
+              <div data-w-id="fd111cc0-c0b3-0844-de03-9b816c098a57" class="div-block-4">
+                <div class="image-cms-wrap">{%- image item.data.f_featured-image.url, item.data.f_featured-image.alt, '[{"max":479,"size":"83vw"},{"max":767,"size":"32vw"},{"max":991,"size":"23vw"},{"max":10000,"size":"230px"}]', 'class="image-14"' -%}</div>
+                <div class="button-15">
+                  <div class="text-block-53">{{ item.data.f_count-of-postings }}</div>
+                </div>
+                <div class="text-block-29">{{ item.data.published-on | formatDate: "MMMM d, yyyy h:mm a" }}</div>
+                <h3 class="heading-2">{{ item.data.title }}</h3>
+              </div>
+              <div class="text-block-31">{{ item.data.f_author-and-designation }}</div>
+              <div class="text-block-52">{{ texts.-57a49ef6 }}</div>
+            </a>
+          </div>{%- endfor -%}
+        </div>{%- endunless -%}
+        {%- if collection.length == 0 -%}<div class="w-dyn-empty">
+          <div>{{ texts.3d503d2b }}</div>
+        </div>{%- endif -%}
+      </div>
+    </div>
